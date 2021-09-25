@@ -1,6 +1,0 @@
-= Class Diagram
-
-[plantuml, cld, png, align=left]
-----
-include::plantuml/cld.puml[]
-----
