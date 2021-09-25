@@ -1,0 +1,27 @@
+= Centermanager
+Felix Dumfarth
+1.0.0, 2021-09-25: Some notes
+ifndef::imagesdir[:imagesdir: images]
+//:toc-placement!:  // prevents the generation of the doc at this position, so it can be printed afterwards
+:sourcedir: ../backend/src/main/java
+:icons: font
+:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc: left
+
+//Need this blank line after ifdef, don't know why...
+ifdef::backend-html5[]
+
+// print the toc here (not at the default position)
+//toc::[]
+
+== Funktionalität
+Man managed Geschäfte, diese haben jeweils einen Besitzer und eine Kategorie,
+diese Geschäfte können auch in Events involviert sein wie zum Beispiel ein Sale.
+
+=== CLD
+
+[plantuml, cld, png, align=left]
+----
+include::plantuml/cld.puml[]
+----
+
