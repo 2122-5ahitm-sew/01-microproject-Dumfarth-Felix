@@ -1,0 +1,29 @@
+GET localhost:8080/events
+###
+POST localhost:8080/events/addEvent
+Content-Type: application/json
+
+{
+  "name": "Big Sale",
+  "date": "13.11.2020"
+}
+####
+DELETE localhost:8080/events/delEvent
+Content-Type: application/json
+
+{
+  "name": "Big Sale"
+}
+
+###
+#PATCH localhost:8080/events/updateDate
+#Content-Type: application/json
+#
+#{
+#  "name": "Big Sale",
+#  "newDate": "25.12.2020"
+#}
+####
+#GET localhost:8080/events/findEventName?name=Big Sale
+####
+#GET localhost:8080/events/findEventDate?date=13.11.2020
