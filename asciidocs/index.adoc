@@ -20,5 +20,8 @@ diese Geschäfte können auch in Events involviert sein wie zum Beispiel ein Sal
 
 === CLD
 
-ifdef::backend-html5,backend-revealjs[image:cld.png[width=100%]]
+[plantuml, cld, png, align=left]
+----
+include::plantuml/cld.puml[]
+----
 
