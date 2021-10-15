@@ -6,8 +6,11 @@ class Person {
 +String getFirstName()
 +void setFirstName()
 }
-Person "1"<-->"*" Store :owns
-Store "*"<-->"0..*" Event :is involved
+
+Store "*"--"1" Category :has
+Person "1"--"*" Store :owns
+Store "*"--"0..*" Event :is involved
+
 class Store{
 -int storeId
 +int getStoreId()
@@ -35,8 +38,8 @@ class Event{
 +String getName()
 +void setName()
 -List<Store> involvedStores
-+Store getInvolvedStore()
-+void setInvolveldStore()
++List<Store> getInvolvedStores()
++void setInvolvedStore()
 + String toString()
 
 }
