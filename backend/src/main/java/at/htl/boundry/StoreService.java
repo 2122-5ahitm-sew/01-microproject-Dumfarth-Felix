@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
+import java.util.List;
 
 @Path("stores")
 public class StoreService {
@@ -23,16 +24,11 @@ public class StoreService {
     @Inject
     StoreRepository storeRepository;
 
-    private ObjectMapper mapper = new ObjectMapper();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String allStores() throws JsonProcessingException {
-        StringBuilder output = new StringBuilder();
-        for (PanacheEntityBase s : storeRepository.listAll()) {
-            output.append(mapper.writeValueAsString(s)).append("\n");
-        }
-        return output.toString();
+    public List<Store> allStores() throws JsonProcessingException {
+        return storeRepository.listAll();
     }
 
 
@@ -41,7 +37,7 @@ public class StoreService {
     @Path("addStore")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String addStore(JsonObject storeJson) throws JsonProcessingException {
+    public Store addStore(JsonObject storeJson) throws JsonProcessingException {
         String name = storeJson.getString("name");
         int rent = Integer.parseInt(storeJson.getString("rent"));
         String storekeeper = storeJson.getString("storekeeper");
@@ -55,14 +51,14 @@ public class StoreService {
         storekeeperPerson.persist();
         s.setShopkeeper(storekeeperPerson);
         storeRepository.persist(s);
-       return mapper.writeValueAsString(s);
+       return s;
     }
     @Transactional
     @POST
     @Path("addStores")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String addStore(JsonArray storesJson) throws JsonProcessingException {
+    public ArrayList<Store> addStore(JsonArray storesJson) throws JsonProcessingException {
         ArrayList<Store> storeList = new ArrayList<>();
         for (JsonValue storeJsonValue :
                 storesJson) {
@@ -82,7 +78,7 @@ public class StoreService {
             storeRepository.persist(s);
             storeList.add(s);
         }
-        return mapper.writeValueAsString(storeList);
+        return storeList;
     }
 
     @Transactional
@@ -99,25 +95,25 @@ public class StoreService {
     @Path("updateRent")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updateRent(JsonObject storeJson) throws JsonProcessingException {
+    public int updateRent(JsonObject storeJson) throws JsonProcessingException {
 
         String name = storeJson.getString("name");
         int newRent = Integer.parseInt(storeJson.getString("newRent"));
-        return mapper.writeValueAsString(storeRepository.update("update from Store set RENT ="+newRent+" where storename='"+name+"'"));
+        return storeRepository.update("update from Store set RENT ="+newRent+" where storename='"+name+"'");
     }
 
     @GET
     @Path("findStoreName")
     @Produces(MediaType.APPLICATION_JSON)
-    public String findStore(@QueryParam("name") String name) throws JsonProcessingException {
-        return mapper.writeValueAsString(storeRepository.find("storename",name).firstResult());
+    public Store findStore(@QueryParam("name") String name) throws JsonProcessingException {
+        return storeRepository.find("storename",name).firstResult();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String findStoreId(@PathParam("id") long id) throws JsonProcessingException {
-        return mapper.writeValueAsString(storeRepository.findById(id));
+    public Store findStoreId(@PathParam("id") long id) throws JsonProcessingException {
+        return storeRepository.findById(id);
     }
 
 

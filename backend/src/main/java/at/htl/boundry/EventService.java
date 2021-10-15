@@ -26,36 +26,30 @@ import java.util.List;
 @Path("events")
 public class EventService {
 
-    private ObjectMapper mapper = new ObjectMapper();
     private final DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 
     @Inject
     EventRepository eventRepository;
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String allEvents() throws JsonProcessingException {
-        StringBuilder output = new StringBuilder();
-        for (PanacheEntityBase e : eventRepository.listAll()) {
-            output.append(mapper.writeValueAsString(e)).append("\n");
-        }
-        return output.toString();
+    public List<Event> allEvents() throws JsonProcessingException {
+        return eventRepository.listAll();
     }
 
 
+    @Transactional
     @POST
     @Path("addEvent")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Transactional
-    public String addEvent(JsonObject eventJson) throws JsonProcessingException, ParseException {
+    public Event addEvent(JsonObject eventJson) throws JsonProcessingException, ParseException {
         String name = eventJson.getString("name");
         String date = eventJson.getString("date");
-        List<Store> storesList = new ArrayList<Store>();
         Event e = new Event();
         e.setDate(formatter.parse(date));
         e.setName(name);
         eventRepository.persist(e);
-        return mapper.writeValueAsString(e);
+        return e;
     }
 
     @DELETE
@@ -63,10 +57,9 @@ public class EventService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public String delEvent(JsonObject eventJson) throws JsonProcessingException {
+    public Long delEvent(JsonObject eventJson) throws JsonProcessingException {
         String eventName = eventJson.getString("name");
-        long event = eventRepository.delete("name",eventName);
-        return mapper.writeValueAsString(event);
+        return eventRepository.delete("name",eventName);
     }
 
     /*@PATCH

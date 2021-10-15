@@ -2,6 +2,8 @@ package at.htl.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
+import javax.json.bind.annotation.JsonbProperty;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,8 +15,10 @@ public class Event extends PanacheEntity {
     private String name;
     private Date date;
     @OneToMany
+    @JsonbProperty("involved_Stores")
     private List<Store> involvedStores;
 
+    @JsonbTransient
     @Transient
     private DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 

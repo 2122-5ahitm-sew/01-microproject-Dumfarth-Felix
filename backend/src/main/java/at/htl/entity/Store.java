@@ -2,13 +2,12 @@ package at.htl.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.json.bind.annotation.JsonbProperty;
+import javax.persistence.*;
 
 @Entity
 public class Store extends PanacheEntity {
+    @JsonbProperty("store_name")
     private String storeName;
     private int rent;
     @ManyToOne
