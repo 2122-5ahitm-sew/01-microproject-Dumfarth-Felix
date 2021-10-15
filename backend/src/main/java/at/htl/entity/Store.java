@@ -60,6 +60,6 @@ public class Store extends PanacheEntity {
 
     @Override
     public String toString() {
-        return "Store "+storeName;
+        return "Store " + storeName;
     }
 }

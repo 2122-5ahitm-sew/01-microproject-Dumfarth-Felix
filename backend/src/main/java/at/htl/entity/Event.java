@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Entity
 public class Event extends PanacheEntity {
     private String name;
@@ -72,6 +73,6 @@ public class Event extends PanacheEntity {
 
     @Override
     public String toString() {
-        return "Event "+name+" on "+ date;
+        return "Event " + name + " on " + date;
     }
 }

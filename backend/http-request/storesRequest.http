@@ -1,4 +1,5 @@
 GET localhost:8080/stores
+
 ###
 POST localhost:8080/stores/addStore
 Content-Type: application/json
@@ -9,17 +10,18 @@ Content-Type: application/json
   "storekeeper": "Ronald Mcdonald",
   "category": "gastronomy"
 }
+
 ###
 POST localhost:8080/stores/addStores
 Content-Type: application/json
 
 [
-{
-  "name": "Mcdonalds",
-  "rent": "1200",
-  "storekeeper": "Ronald Mcdonald",
-  "category": "gastronomy"
-},
+  {
+    "name": "Mcdonalds",
+    "rent": "1200",
+    "storekeeper": "Ronald Mcdonald",
+    "category": "gastronomy"
+  },
   {
     "name": "Mediamarkt",
     "rent": "350",
@@ -27,6 +29,7 @@ Content-Type: application/json
     "category": "ELECTRONICS"
   }
 ]
+
 ###
 DELETE localhost:8080/stores/delStore
 Content-Type: application/json
@@ -43,7 +46,9 @@ Content-Type: application/json
   "name": "Mcdonalds",
   "newRent": "2500"
 }
+
 ###
 GET localhost:8080/stores/findStoreName?name=Mcdonalds
+
 ###
 GET localhost:8080/stores/4

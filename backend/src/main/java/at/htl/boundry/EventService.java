@@ -31,6 +31,7 @@ public class EventService {
 
     @Inject
     EventRepository eventRepository;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Event> allEvents() throws JsonProcessingException {
@@ -60,7 +61,7 @@ public class EventService {
     @Transactional
     public Long delEvent(JsonObject eventJson) throws JsonProcessingException {
         String eventName = eventJson.getString("name");
-        return eventRepository.delete("name",eventName);
+        return eventRepository.delete("name", eventName);
     }
 
     @PATCH
@@ -71,21 +72,21 @@ public class EventService {
     public int updateDate(JsonObject eventJson) throws JsonProcessingException, ParseException {
         String name = eventJson.getString("name");
         String newDate = eventJson.getString("newDate");
-        return Event.update("date = '"+formatterSql.format(formatter.parse(newDate))+"' where name = ?1",name);
+        return Event.update("date = '" + formatterSql.format(formatter.parse(newDate)) + "' where name = ?1", name);
     }
 
     @GET
     @Path("findEventName")
     @Produces(MediaType.APPLICATION_JSON)
     public Event findEventName(@QueryParam("name") String name) throws JsonProcessingException {
-        return eventRepository.find("name",name).firstResult();
+        return eventRepository.find("name", name).firstResult();
     }
 
     @GET
     @Path("findEventDate")
     @Produces(MediaType.TEXT_PLAIN)
     public List<Event> findEventDate(@QueryParam("date") String date) throws JsonProcessingException, ParseException {
-        return eventRepository.find("date",formatter.parse(date)).list();
+        return eventRepository.find("date", formatter.parse(date)).list();
     }
 
 

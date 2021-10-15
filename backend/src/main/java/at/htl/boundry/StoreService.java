@@ -51,8 +51,9 @@ public class StoreService {
         storekeeperPerson.persist();
         s.setShopkeeper(storekeeperPerson);
         storeRepository.persist(s);
-       return s;
+        return s;
     }
+
     @Transactional
     @POST
     @Path("addStores")
@@ -87,7 +88,7 @@ public class StoreService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public boolean delStore(JsonObject storeJson) throws JsonProcessingException {
-       return storeRepository.deleteById(((long) storeJson.getInt("id")));
+        return storeRepository.deleteById(((long) storeJson.getInt("id")));
     }
 
     @Transactional
@@ -99,14 +100,14 @@ public class StoreService {
 
         String name = storeJson.getString("name");
         int newRent = Integer.parseInt(storeJson.getString("newRent"));
-        return storeRepository.update("update from Store set RENT ="+newRent+" where storename='"+name+"'");
+        return storeRepository.update("update from Store set RENT =" + newRent + " where storename='" + name + "'");
     }
 
     @GET
     @Path("findStoreName")
     @Produces(MediaType.APPLICATION_JSON)
     public Store findStore(@QueryParam("name") String name) throws JsonProcessingException {
-        return storeRepository.find("storename",name).firstResult();
+        return storeRepository.find("storename", name).firstResult();
     }
 
     @GET
