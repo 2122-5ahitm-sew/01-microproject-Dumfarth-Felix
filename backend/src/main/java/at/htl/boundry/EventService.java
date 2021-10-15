@@ -27,6 +27,7 @@ import java.util.List;
 public class EventService {
 
     private final DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+    private final DateFormat formatterSql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Inject
     EventRepository eventRepository;
@@ -62,35 +63,30 @@ public class EventService {
         return eventRepository.delete("name",eventName);
     }
 
-    /*@PATCH
+    @PATCH
     @Path("updateDate")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public String updateDate(JsonObject eventJson) throws JsonProcessingException, ParseException {
-
+    public int updateDate(JsonObject eventJson) throws JsonProcessingException, ParseException {
         String name = eventJson.getString("name");
         String newDate = eventJson.getString("newDate");
-        return mapper.writeValueAsString(Event.update("date = '"+newDate+"' where name = ?1",name));
+        return Event.update("date = '"+formatterSql.format(formatter.parse(newDate))+"' where name = ?1",name);
     }
 
     @GET
     @Path("findEventName")
     @Produces(MediaType.APPLICATION_JSON)
-    public String findEventName(@QueryParam("name") String name) throws JsonProcessingException {
-        return mapper.writeValueAsString(Event.find("select e from Event e where name='"+name+"'"));
+    public Event findEventName(@QueryParam("name") String name) throws JsonProcessingException {
+        return eventRepository.find("name",name).firstResult();
     }
 
     @GET
     @Path("findEventDate")
     @Produces(MediaType.TEXT_PLAIN)
-    public String findEventDate(@QueryParam("date") String date) throws JsonProcessingException, ParseException {
-        StringBuilder output = new StringBuilder();
-        for (PanacheEntityBase e : Event.find("select e from Event e where date="+date+"").list()) {
-            output.append(mapper.writeValueAsString(e)).append("\n");
-        }
-        return output.toString();
-    }*/
+    public List<Event> findEventDate(@QueryParam("date") String date) throws JsonProcessingException, ParseException {
+        return eventRepository.find("date",formatter.parse(date)).list();
+    }
 
 
 }
