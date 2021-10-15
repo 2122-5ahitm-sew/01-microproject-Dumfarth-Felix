@@ -18,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("stores")
+@Path("api/stores")
 public class StoreService {
 
     @Inject

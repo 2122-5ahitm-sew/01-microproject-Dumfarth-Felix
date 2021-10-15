@@ -2,6 +2,7 @@ package at.htl.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @Entity
 public class Event extends PanacheEntity {
     private String name;
+    @JsonbDateFormat("yyyy-MM-dd")
     private Date date;
     @OneToMany
     @JsonbProperty("involved_Stores")
@@ -26,7 +28,7 @@ public class Event extends PanacheEntity {
     public Event(String name, Date date) {
         this.date = date;
         this.name = name;
-        this.involvedStores = new ArrayList<Store>();
+        this.involvedStores = new ArrayList<>();
     }
 
     public Event(String name, Date date, List<Store> involvedStores) {

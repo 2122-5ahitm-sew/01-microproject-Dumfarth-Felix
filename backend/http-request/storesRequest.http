@@ -1,7 +1,7 @@
-GET localhost:8080/stores
+GET localhost:8080/api/stores
 
 ###
-POST localhost:8080/stores/addStore
+POST localhost:8080/api/stores/addStore
 Content-Type: application/json
 
 {
@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ###
-POST localhost:8080/stores/addStores
+POST localhost:8080/api/stores/addStores
 Content-Type: application/json
 
 [
@@ -31,7 +31,7 @@ Content-Type: application/json
 ]
 
 ###
-DELETE localhost:8080/stores/delStore
+DELETE localhost:8080/api/stores/delStore
 Content-Type: application/json
 
 {
@@ -39,7 +39,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH localhost:8080/stores/updateRent
+PATCH localhost:8080/api/stores/updateRent
 Content-Type: application/json
 
 {
@@ -48,7 +48,7 @@ Content-Type: application/json
 }
 
 ###
-GET localhost:8080/stores/findStoreName?name=Mcdonalds
+GET localhost:8080/api/stores/findStoreName?name=Mcdonalds
 
 ###
-GET localhost:8080/stores/4
+GET localhost:8080/api/stores/4

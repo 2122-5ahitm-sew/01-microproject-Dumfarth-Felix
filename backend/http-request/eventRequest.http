@@ -1,6 +1,6 @@
-GET localhost:8080/events
+GET localhost:8080/api/events
 ###
-POST localhost:8080/events/addEvent
+POST localhost:8080/api/events/addEvent
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
   "date": "13.11.2020"
 }
 ###
-DELETE localhost:8080/events/delEvent
+DELETE localhost:8080/api/events/delEvent
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH localhost:8080/events/updateDate
+PATCH localhost:8080/api/events/updateDate
 Content-Type: application/json
 
 {
@@ -24,6 +24,6 @@ Content-Type: application/json
   "newDate": "25.12.2020"
 }
 ###
-GET localhost:8080/events/findEventName?name=Big Sale
+GET localhost:8080/api/events/findEventName?name=Big Sale
 ###
-GET localhost:8080/events/findEventDate?date=13.11.2020
+GET localhost:8080/api/events/findEventDate?date=13.11.2020

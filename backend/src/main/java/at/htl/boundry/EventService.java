@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Path("events")
+@Path("api/events")
 public class EventService {
 
     private final DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
