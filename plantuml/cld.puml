@@ -1,0 +1,55 @@
+@startuml
+
+class Person {
+-String firstName
+-String lastName
++String getFirstName()
++void setFirstName()
+}
+
+Store "*"--"1" Category :has
+Person "1"--"*" Store :owns
+Store "*"--"0..*" Event :is involved
+
+class Store{
+-int storeId
++int getStoreId()
++void setStoreId()
+-String storeName
++String getStoreName()
++void setStoreName()
+-int rent
++int getRent()
++void setRent()
+-Person shopkeeper
++Person getShopKeeper()
++void setShopKeeper()
+-Category category
++Category getCategory()
++void setCategory()
++ String toString()
+}
+
+class Event{
+-Date date
++Date getDate()
++void setDate()
+-String name
++String getName()
++void setName()
+-List<Store> involvedStores
++List<Store> getInvolvedStores()
++void setInvolvedStore()
++ String toString()
+
+}
+
+enum Category {
+    CLOTHING
+    BOOKS
+    ELECTRONICS
+    GASTRONOMY
+    ENTERTAINMENT
+}
+
+@enduml
